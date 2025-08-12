@@ -13,7 +13,7 @@ import openai
 from openai import OpenAI
 import os
 
-api_key = st.secrets.get("OPENAI_API_KEY") 
+api_key = st.secrets.get("OPENAI_API_KEY") or os.getenv("OPENAI_API_KEY")
 if not api_key:
     raise RuntimeError("OPENAI_API_KEY is not set in Streamlit Secrets or env.")
 
@@ -424,7 +424,7 @@ Write a concise and accurate paragraph summarizing the turbine's status. If ther
 """
 
     response = client.chat.completions.create(
-        model="gpt-4",
+        model="gpt-5",
         messages=[
             {"role": "system", "content": "You generate clear, expert-level summaries of anomaly detection results in wind turbine data."},
             {"role": "user", "content": prompt}
