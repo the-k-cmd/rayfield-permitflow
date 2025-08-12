@@ -13,7 +13,7 @@ import openai
 from openai import OpenAI
 import os
 
-api_key = st.secrets.get("OPENAI_API_KEY") or os.getenv("OPENAI_API_KEY")
+api_key = st.secrets.get("OPENAI_API_KEY") 
 if not api_key:
     raise RuntimeError("OPENAI_API_KEY is not set in Streamlit Secrets or env.")
 
