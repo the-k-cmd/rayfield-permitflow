@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 from io import StringIO
 import requests
+import time
 from ai_module import (
     clean_turbine_data,
     add_engineered_features,
@@ -29,7 +30,8 @@ if not zapier_webhook_url:
     raise RuntimeError("ZAPIER_WEBHOOK_URL is not set in Streamlit Secrets or env.")
 
 st.set_page_config(page_title="Permit Flow", page_icon="🌀", layout="wide")
-
+if 'btn_lock_until' not in st.session_state:
+    st.session_state.btn_lock_until = 0
 
 @st.cache_resource(show_spinner=True)
 def train_model():
@@ -124,7 +126,6 @@ def severity_badge(sev: str) -> str:
         return '<span class="sev-med">Medium</span>'
     return '<span class="sev-low">Low</span>'
 
-
 def make_report(record: dict) -> str:
     lines = [
         f"Permit Flow — Turbine Analysis Report",
@@ -209,9 +210,11 @@ elif nav == "Anomaly Detection":
         "Total Height (m)", min_value=0.0, value=140.0, step=1.0
     )
 
-    run = st.button("Run Compliance Check", type="primary", use_container_width=True)
+    locked = time.time() < st.session_state.btn_lock_until
+    run = st.button("Run Compliance Check", type="primary", use_container_width=True, disabled=locked)
 
-    if run:
+    if run and not locked:
+        st.session_state.btn_lock_until = time.time() + 1.0
         if not turbine_name:
             st.error("Please enter a turbine name or ID.")
         else:
