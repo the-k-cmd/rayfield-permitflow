@@ -37,8 +37,8 @@ if "btn_lock_until" not in st.session_state:
 @st.cache_resource(show_spinner=True)
 def train_model():
     df = clean_turbine_data(filepath="wind_turbines.csv", save_cleaned=False)
-    df = add_engineered_features(df)
     df = inject_synthetic_anomalies(df)
+    df = add_engineered_features(df)
 
     X_train, X_test, y_train, y_test = split_data(df)
 
