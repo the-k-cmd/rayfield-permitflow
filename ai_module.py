@@ -424,7 +424,7 @@ Write a concise and accurate paragraph summarizing the turbine's status. If ther
 """
 
     response = client.chat.completions.create(
-        model="gpt-5",
+        model="gpt-4o-mini",
         messages=[
             {"role": "system", "content": "You generate clear, expert-level summaries of anomaly detection results in wind turbine data."},
             {"role": "user", "content": prompt}
