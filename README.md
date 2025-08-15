@@ -1,43 +1,43 @@
 # Wind Turbine Anomaly Detection
 
-A machine learning pipeline for detecting unusual wind turbine configurations, helping engineers identify potential issues early to improve efficiency and safety.
+A machine learning pipeline for detecting unusual wind turbine configurations, helping engineers identify potential issues early to improve efficiency and safety
 
 ---
 
 ## Project Overview
-This project detects anomalies in turbine performance using **Isolation Forest**. Users can input turbine specifications through a **Streamlit frontend**, see visual comparisons to the dataset, and receive a **ChatGPT-generated summary** when anomalies are detected. **Zapier notifications** alert stakeholders automatically through Slack.
+This project detects anomalies in turbine performance using **Isolation Forest**. Users can input turbine specifications through a **Streamlit frontend**, see visual comparisons to the dataset, and receive a **ChatGPT-generated summary** when anomalies are detected. **Zapier notifications** alert stakeholders automatically through Slack
 
 ---
 
 ## Features
-- **Interactive Frontend:** Input turbine specs and receive instant anomaly predictions.  
-- **Visualizations:** Altair, Matplotlib, and Seaborn charts for trend and feature comparisons.  
-- **Backend Processing:** Dataset cleaning, synthetic anomaly injection (5% of turbines), and feature engineering.  
-- **Engineered Features:** Rotor-to-height ratio, capacity-to-rotor ratio, and other meaningful derived metrics.  
-- **Model:** Isolation Forest for unsupervised anomaly detection.  
-- **Evaluation:** Precision, recall, and F1 calculated using synthetic anomalies.  
+- **Interactive Frontend:** Input turbine specs and receive instant anomaly predictions
+- **Visualizations:** Altair, Matplotlib, and Seaborn charts for trend and feature comparisons
+- **Backend Processing:** Dataset cleaning, synthetic anomaly injection (5% of turbines), and feature engineering
+- **Engineered Features:** Rotor-to-height ratio, capacity-to-rotor ratio, and other meaningful derived metrics
+- **Model:** Isolation Forest for unsupervised anomaly detection
+- **Evaluation:** Precision, recall, and F1 calculated using synthetic anomalies
 
 ---
 
 ## Dataset
 - Source: CORGIS Wind Turbines Dataset  
-- Preprocessing: Missing values handled, unnecessary columns removed, and data types converted.  
-- Perturbing Real Data: Injecting small controlled anomalies into valid turbine designs (values that just exceed known thresholds or break design rules). 
+- Preprocessing: Missing values handled, unnecessary columns removed, and data types converted
+- Perturbing Real Data: Injecting small controlled anomalies into valid turbine designs (values that just exceed known thresholds or break design rules)
 
 ---
 
 ## Model & Method
-- **Algorithm:** Isolation Forest chosen for unsupervised anomaly detection.  
-- **Synthetic Anomalies:** Injected into 5% of turbines to simulate unusual or guideline-exceeding configurations.  
-- **Train/Test Split:** Ensures generalization, synthetic anomalies in test set allow evaluation.  
-- **Feature Scaling:** Standardized to prevent bias from differing magnitudes.  
+- **Algorithm:** Isolation Forest chosen for unsupervised anomaly detection
+- **Synthetic Anomalies:** Injected into 5% of turbines to simulate unusual or guideline-exceeding configurations
+- **Train/Test Split:** Ensures generalization, synthetic anomalies in test set allow evaluation
+- **Feature Scaling:** Standardized to prevent bias from differing magnitudes
 
 ---
 
 ## Frontend & Integration
-- **Streamlit UI:** Rapid prototyping with interactive inputs, visualizations, and real-time predictions.  
-- **ChatGPT Summary:** Explains why a turbine is flagged anomalous and highlights which metrics deviate.  
-- **Zapier Notifications:** Triggered automatically when anomalies are detected.   
+- **Streamlit UI:** Rapid prototyping with interactive inputs, visualizations, and real-time predictions 
+- **ChatGPT Summary:** Explains why a turbine is flagged anomalous and highlights which metrics deviate
+- **Zapier Notifications:** Triggered automatically when anomalies are detected
 
 ---
 
@@ -49,26 +49,26 @@ This project detects anomalies in turbine performance using **Isolation Forest**
 ---
 
 ## Team & Workflow
-- **Team Members:** Harshitha, Adham, Kiyan, Alonso.  
-- **Week 1:** Individual deliverables to align on project vision.  
-- **Week 2:** Dataset selection, cleaning, and preprocessing.  
-- **Week 3:** ML model development and backend integration.  
-- **Week 4:** Frontend completion and dashboard integration.  
-- **Week 5:** Future development planning and presentation preparation.  
+- **Team Members:** Harshitha, Adham, Kiyan, Alonso
+- **Week 1:** Individual deliverables to align on project vision
+- **Week 2:** Dataset selection, cleaning, and preprocessing
+- **Week 3:** ML model development and backend integration
+- **Week 4:** Frontend completion and dashboard integration
+- **Week 5:** Future development planning and presentation preparation
 
 ---
 
 ## Limitations & Future Work
-- **CAD Drag & Drop:** Backend ready, frontend integration pending (full code on CAD-Future branch).  
-- **Model Accuracy:** Could improve with more real anomalies, expanded synthetic dataset, or experiment with different models.  
-- **Next Steps:** Expand synthetic anomalies, experiment with different datasets, add engineered features, explore ensemble or autoencoder-based models, rebuild frontend as a full-featured web app beyond Streamlitand, and adapt to new turbine types or regions.  
+- **CAD Drag & Drop:** Backend ready, frontend integration pending (full code on CAD-Future branch)
+- **Model Accuracy:** Could improve with more real anomalies, expanded synthetic dataset, or experiment with different models
+- **Next Steps:** Expand synthetic anomalies, experiment with different datasets, add engineered features, explore ensemble or autoencoder-based models, rebuild frontend as a full-featured web app beyond Streamlitand, and adapt to new turbine types or regions
 
 ---
 
 ## Key Learnings
-- **Technical:** Data preprocessing, feature engineering, ML pipeline integration.  
-- **Soft Skills:** Teamwork, communication, aligning on shared vision.  
-- **Industry Insight:** Understanding gaps in wind energy engineering workflows and regulatory considerations.  
+- **Technical:** Data preprocessing, feature engineering, ML pipeline integration
+- **Soft Skills:** Teamwork, communication, aligning on shared vision
+- **Industry Insight:** Understanding gaps in wind energy engineering workflows and regulatory considerations
 
 ---
 
