@@ -30,8 +30,9 @@ if not zapier_webhook_url:
     raise RuntimeError("ZAPIER_WEBHOOK_URL is not set in Streamlit Secrets or env.")
 
 st.set_page_config(page_title="Permit Flow", page_icon="🌀", layout="wide")
-if 'btn_lock_until' not in st.session_state:
+if "btn_lock_until" not in st.session_state:
     st.session_state.btn_lock_until = 0
+
 
 @st.cache_resource(show_spinner=True)
 def train_model():
@@ -126,6 +127,7 @@ def severity_badge(sev: str) -> str:
         return '<span class="sev-med">Medium</span>'
     return '<span class="sev-low">Low</span>'
 
+
 def make_report(record: dict) -> str:
     lines = [
         f"Permit Flow — Turbine Analysis Report",
@@ -211,7 +213,12 @@ elif nav == "Anomaly Detection":
     )
 
     locked = time.time() < st.session_state.btn_lock_until
-    run = st.button("Run Compliance Check", type="primary", use_container_width=True, disabled=locked)
+    run = st.button(
+        "Run Compliance Check",
+        type="primary",
+        use_container_width=True,
+        disabled=locked,
+    )
 
     if run and not locked:
         st.session_state.btn_lock_until = time.time() + 1.0
