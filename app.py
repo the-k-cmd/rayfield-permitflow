@@ -176,11 +176,23 @@ if nav == "Home":
     with st.expander("Show training feature distributions & relationships"):
 
         corrs = compute_feature_anomaly_correlation(model, X_train)
-        plot_feature_correlation_heatmap(corrs, use_streamlit=True)
         scores = model.decision_function(X_train)
-        plot_top_feature_relationships(
-            X_train, scores, corrs, top_n=3, use_streamlit=True
+
+        c1, c2, c3, c4 = st.columns(4)
+
+        with c1:
+            plot_feature_correlation_heatmap(corrs, use_streamlit=True)
+
+        figs = plot_top_feature_relationships(
+            X_train, scores, corrs, top_n=3, use_streamlit=False 
         )
+
+        with c2:
+            st.pyplot(figs[0])
+        with c3:
+            st.pyplot(figs[1])
+        with c4:
+            st.pyplot(figs[2])
 
 elif nav == "Anomaly Detection":
     st.markdown("### Smart Design Workplace")
