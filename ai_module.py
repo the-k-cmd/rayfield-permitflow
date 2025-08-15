@@ -134,7 +134,7 @@ def add_engineered_features(df, dropna: bool = True):
 
 # Anomaly injection
 def inject_synthetic_anomalies(
-    df: pd.DataFrame, anomaly_ratio: float = 0.05, verbose: bool = False
+    df: pd.DataFrame, anomaly_ratio: float = 0.10, verbose: bool = False
 ) -> pd.DataFrame:
 
     df = df.copy()
@@ -546,7 +546,7 @@ def run_test_pipeline():
     df = add_engineered_features(df)
 
     # 3. Inject anomalies
-    df = inject_synthetic_anomalies(df, anomaly_ratio=0.05)
+    df = inject_synthetic_anomalies(df, anomaly_ratio=0.10)
 
     # 4. Split data
     X_train, X_test, y_train, y_test = split_data(df)
@@ -555,7 +555,7 @@ def run_test_pipeline():
     param_grid = {
         "n_estimators": [100],
         "max_samples": ["auto"],
-        "contamination": [0.05],  # match synthetic anomaly ratio
+        "contamination": [0.10],  # match synthetic anomaly ratio
         "max_features": [1.0],
     }
 
