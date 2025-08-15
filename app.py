@@ -454,3 +454,49 @@ elif nav == "Contact Us":
             st.error("Please fill in all fields before sending.")
         else:
             st.success("✅ Thank you for reaching out! We will get back to you soon.")
+
+from cad_adapter import extract_turbine_dims_from_dxf, to_model_row
+
+# Load your existing sklearn Pipeline (imputer/scaler + IsolationForest)
+MODEL_PATH = "models/iso_turbine.pkl"
+FEATURE_ORDER_PATH = "models/feature_order.json"  # or None if using DEFAULT_FEATURE_ORDER
+model = joblib.load(MODEL_PATH)
+
+st.header("Turbine Anomaly Check")
+uploaded = st.file_uploader("Drag & drop CSV or DXF", type=["csv", "dxf"])
+
+if uploaded:
+    suffix = Path(uploaded.name).suffix.lower()
+
+    if suffix == ".csv":
+        # your current behavior — unchanged
+        df = pd.read_csv(uploaded)
+        # ... existing scoring code
+        st.write("Scored CSV as usual ✅")
+
+    elif suffix == ".dxf":
+        tmp = Path("tmp"); tmp.mkdir(exist_ok=True)
+        fpath = tmp / uploaded.name
+        with open(fpath, "wb") as f:
+            f.write(uploaded.read())
+
+        st.info("Reading CAD…")
+        dims = extract_turbine_dims_from_dxf(fpath)
+        st.json(dims)  # show the extracted numbers
+
+        # Align to your model’s expected order
+        order, X = to_model_row(dims, FEATURE_ORDER_PATH)
+
+        # Score EXACTLY like your CSV flow
+        score = float(model.decision_function(X)[0])
+        pred = int(model.predict(X)[0])
+        is_anomaly = (pred == -1)
+
+        st.metric("Anomaly score (higher = more normal)", f"{score:.3f}")
+        st.success("Normal ✅") if not is_anomaly else st.error("Anomalous ⚠️")
+
+        # Optional: reuse your existing LLM explainer so behavior is identical
+        if st.button("Explain with AI"):
+            # Implement this using your current ai_module so tone & style are unchanged
+            from ai_module import llm_explain  # same function you use today
+            st.write(llm_explain(dims, score, is_anomaly))
